@@ -9,7 +9,7 @@
 import LBTAComponents
 
 class Header: DatasourceCell {
-    let textlabel: UILabel = {
+    @objc let textlabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "Collection Header"
@@ -25,7 +25,7 @@ class Header: DatasourceCell {
 }
 
 class Footer: DatasourceCell {
-    let textlabel: UILabel = {
+    @objc let textlabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.text = "Footer"
@@ -48,9 +48,9 @@ class WordCell: DatasourceCell {
         }
     }
     
-    let wordlabel = UILabel()
+    @objc let wordlabel = UILabel()
     
-    let dividerLineView: UIView = {
+    @objc let dividerLineView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(white: 0, alpha: 0.5)
         return view

@@ -10,10 +10,10 @@ import UIKit
 
 open class DiscardableImageCacheItem: NSObject, NSDiscardableContent {
     
-    private(set) public var image: UIImage?
-    var accessCount: UInt = 0
+    @objc private(set) public var image: UIImage?
+    @objc var accessCount: UInt = 0
     
-    public init(image: UIImage) {
+    @objc public init(image: UIImage) {
         self.image = image
     }
     

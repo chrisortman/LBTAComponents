@@ -15,14 +15,14 @@ import UIKit
  */
 open class DatasourceController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    open let activityIndicatorView: UIActivityIndicatorView = {
-        let aiv = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+    @objc public let activityIndicatorView: UIActivityIndicatorView = {
+        let aiv = UIActivityIndicatorView(style: .whiteLarge)
         aiv.hidesWhenStopped = true
         aiv.color = .black
         return aiv
     }()
     
-    open var datasource: Datasource? {
+    @objc open var datasource: Datasource? {
         didSet {
             if let cellClasses = datasource?.cellClasses() {
                 for cellClass in cellClasses {
@@ -32,13 +32,13 @@ open class DatasourceController: UICollectionViewController, UICollectionViewDel
             
             if let headerClasses = datasource?.headerClasses() {
                 for headerClass in headerClasses {
-                    collectionView?.register(headerClass, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: NSStringFromClass(headerClass))
+                    collectionView?.register(headerClass, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NSStringFromClass(headerClass))
                 }
             }
             
             if let footerClasses = datasource?.footerClasses() {
                 for footerClass in footerClasses {
-                    collectionView?.register(footerClass, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: NSStringFromClass(footerClass))
+                    collectionView?.register(footerClass, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: NSStringFromClass(footerClass))
                 }
             }
             
@@ -54,9 +54,9 @@ open class DatasourceController: UICollectionViewController, UICollectionViewDel
         fatalError("init(coder:) has not been implemented")
     }
     
-    let defaultCellId = "lbta_defaultCellId"
-    let defaultFooterId = "lbta_defaultFooterId"
-    let defaultHeaderId = "lbta_defaultHeaderId"
+    @objc let defaultCellId = "lbta_defaultCellId"
+    @objc let defaultFooterId = "lbta_defaultFooterId"
+    @objc let defaultHeaderId = "lbta_defaultHeaderId"
     
     override open func viewDidLoad() {
         super.viewDidLoad()
@@ -68,8 +68,8 @@ open class DatasourceController: UICollectionViewController, UICollectionViewDel
         activityIndicatorView.anchorCenterYToSuperview()
         
         collectionView?.register(DefaultCell.self, forCellWithReuseIdentifier: defaultCellId)
-        collectionView?.register(DefaultHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: defaultHeaderId)
-        collectionView?.register(DefaultFooter.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: defaultFooterId)
+        collectionView?.register(DefaultHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: defaultHeaderId)
+        collectionView?.register(DefaultFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: defaultFooterId)
     }
     
     override open func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -109,7 +109,7 @@ open class DatasourceController: UICollectionViewController, UICollectionViewDel
         
         let reusableView: DatasourceCell
         
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionView.elementKindSectionHeader {
             if let classes = datasource?.headerClasses(), classes.count > indexPath.section {
                 reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: NSStringFromClass(classes[indexPath.section]), for: indexPath) as! DatasourceCell
             } else if let cls = datasource?.headerClasses()?.first {
@@ -135,17 +135,17 @@ open class DatasourceController: UICollectionViewController, UICollectionViewDel
         return reusableView
     }
     
-    open func getRefreshControl() -> UIRefreshControl {
+    @objc open func getRefreshControl() -> UIRefreshControl {
         let rc = UIRefreshControl()
         rc.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         return rc
     }
     
-    open func handleRefresh() {
+    @objc open func handleRefresh() {
         
     }
     
-    open var layout: UICollectionViewFlowLayout? {
+    @objc open var layout: UICollectionViewFlowLayout? {
         get {
             return collectionViewLayout as? UICollectionViewFlowLayout
         }

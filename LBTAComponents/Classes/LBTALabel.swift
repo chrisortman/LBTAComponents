@@ -10,7 +10,7 @@ import UIKit
 
 open class LBTALabel: UILabel {
     
-    public init(text: String? = nil, font: UIFont? = nil) {
+    @objc public init(text: String? = nil, font: UIFont? = nil) {
         super.init(frame: .zero)
         self.text = text
         self.font = font

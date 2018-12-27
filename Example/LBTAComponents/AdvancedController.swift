@@ -21,7 +21,7 @@ class AppCell: DatasourceCell {
         }
     }
     
-    let nameLabel: UILabel = {
+    @objc let nameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.boldSystemFont(ofSize: 14)
@@ -38,7 +38,7 @@ class AppCell: DatasourceCell {
 }
 
 class AppCategory: Datasource {
-    let name: String
+    @objc let name: String
     let apps: [App]
     
     init(name: String, apps: [App]) {
@@ -79,7 +79,7 @@ class AppCategoryCell: DatasourceCell {
         }
     }
     
-    let appsController = AppsController()
+    @objc let appsController = AppsController()
     
     override func setupViews() {
         super.setupViews()

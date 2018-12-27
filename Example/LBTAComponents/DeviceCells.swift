@@ -17,7 +17,7 @@ class DeviceHeader: DatasourceCell {
         }
     }
     
-    let label = UILabel()
+    @objc let label = UILabel()
     
     override func setupViews() {
         super.setupViews()
@@ -38,9 +38,9 @@ class iPhoneCell: DatasourceCell {
         }
     }
     
-    let imageView = CachedImageView()
+    @objc let imageView = CachedImageView()
     
-    let nameLabel = UILabel()
+    @objc let nameLabel = UILabel()
     
     override func setupViews() {
         super.setupViews()

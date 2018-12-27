@@ -54,7 +54,7 @@ class DefaultCell: DatasourceCell {
         }
     }
     
-    let label = UILabel()
+    @objc let label = UILabel()
     
     override func setupViews() {
         super.setupViews()

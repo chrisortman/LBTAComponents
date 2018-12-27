@@ -13,27 +13,27 @@ import UIKit
  */
 open class CachedImageView: UIImageView {
     
-    open static let imageCache = NSCache<NSString, DiscardableImageCacheItem>()
+    @objc public static let imageCache = NSCache<NSString, DiscardableImageCacheItem>()
     
-    open var shouldUseEmptyImage = true
+    @objc open var shouldUseEmptyImage = true
     
     private var urlStringForChecking: String?
     private var emptyImage: UIImage?
     
-    public convenience init(cornerRadius: CGFloat = 0, tapCallback: @escaping (() ->())) {
+    @objc public convenience init(cornerRadius: CGFloat = 0, tapCallback: @escaping (() ->())) {
         self.init(cornerRadius: cornerRadius, emptyImage: nil)
         self.tapCallback = tapCallback
         isUserInteractionEnabled = true
         addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap)))
     }
     
-    func handleTap() {
+    @objc func handleTap() {
         tapCallback?()
     }
     
     private var tapCallback: (() -> ())?
     
-    public init(cornerRadius: CGFloat = 0, emptyImage: UIImage? = nil) {
+    @objc public init(cornerRadius: CGFloat = 0, emptyImage: UIImage? = nil) {
         super.init(frame: .zero)
         contentMode = .scaleAspectFill
         clipsToBounds = true
@@ -52,7 +52,7 @@ open class CachedImageView: UIImageView {
      - parameter completion: Optionally execute some task after the image download completes
      */
 
-    open func loadImage(urlString: String, completion: (() -> ())? = nil) {
+    @objc open func loadImage(urlString: String, completion: (() -> ())? = nil) {
         image = nil
         
         self.urlStringForChecking = urlString

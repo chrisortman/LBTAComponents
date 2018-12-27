@@ -10,24 +10,24 @@ import UIKit
 
 open class DatasourceCollectionView: UICollectionView, UICollectionViewDataSource {
     
-    let defaultCellId = "lbta_defaultCellId"
-    let defaultFooterId = "lbta_defaultFooterId"
-    let defaultHeaderId = "lbta_defaultHeaderId"
+    @objc let defaultCellId = "lbta_defaultCellId"
+    @objc let defaultFooterId = "lbta_defaultFooterId"
+    @objc let defaultHeaderId = "lbta_defaultHeaderId"
     
     public override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
         backgroundColor = .white
         
         register(DefaultCell.self, forCellWithReuseIdentifier: defaultCellId)
-        register(DefaultHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: defaultHeaderId)
-        register(DefaultFooter.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: defaultFooterId)
+        register(DefaultHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: defaultHeaderId)
+        register(DefaultFooter.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: defaultFooterId)
     }
     
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    open var datasource: Datasource? {
+    @objc open var datasource: Datasource? {
         didSet {
             if let cellClasses = datasource?.cellClasses() {
                 for cellClass in cellClasses {
@@ -37,13 +37,13 @@ open class DatasourceCollectionView: UICollectionView, UICollectionViewDataSourc
             
             if let headerClasses = datasource?.headerClasses() {
                 for headerClass in headerClasses {
-                    register(headerClass, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: NSStringFromClass(headerClass))
+                    register(headerClass, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: NSStringFromClass(headerClass))
                 }
             }
             
             if let footerClasses = datasource?.footerClasses() {
                 for footerClass in footerClasses {
-                    register(footerClass, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: NSStringFromClass(footerClass))
+                    register(footerClass, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: NSStringFromClass(footerClass))
                 }
             }
             self.dataSource = self
@@ -82,7 +82,7 @@ open class DatasourceCollectionView: UICollectionView, UICollectionViewDataSourc
     public func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let reusableView: DatasourceCell
         
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionView.elementKindSectionHeader {
             if let classes = datasource?.headerClasses(), classes.count > indexPath.section {
                 reusableView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: NSStringFromClass(classes[indexPath.section]), for: indexPath) as! DatasourceCell
             } else if let cls = datasource?.headerClasses()?.first {
